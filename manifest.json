@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "WhatsBlitz",
+    "version": "1.0",
+    "description": "WhatsApp Web Automation Tool",
+    "permissions": ["scripting", "activeTab"],
+    "host_permissions": ["https://web.whatsapp.com/*"],
+    "content_scripts": [
+      {
+        "matches": ["https://web.whatsapp.com/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
