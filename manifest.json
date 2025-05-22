@@ -1,14 +1,24 @@
 {
-    "manifest_version": 3,
-    "name": "WhatsBlitz",
-    "version": "1.0",
-    "description": "WhatsApp Web Automation Tool",
-    "permissions": ["scripting", "activeTab"],
-    "host_permissions": ["https://web.whatsapp.com/*"],
-    "content_scripts": [
-      {
-        "matches": ["https://web.whatsapp.com/*"],
-        "js": ["content.js"]
-      }
-    ]
-  }
+  "manifest_version": 3,
+  "name": "WhatsBlitz",
+  "version": "1.0",
+  "description": "WhatsApp Web automation extension",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://web.whatsapp.com/"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "WhatsBlitz"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["sheet.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
