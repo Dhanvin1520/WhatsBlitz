@@ -1,40 +1,43 @@
-document.getElementById("fileInput").addEventListener("change", handleFile, false);
+let parsedData = [];
 
-function handleFile(e) {
-  const file = e.target.files[0];
+document.getElementById("fileInput").addEventListener("change", handleFile);
+document.getElementById("sendFirst").addEventListener("click", () => {
+  if (parsedData.length > 0) {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: sendMessageToContact,
+        args: [parsedData[0]]
+      });
+    });
+  }
+});
+
+function handleFile(event) {
+  const file = event.target.files[0];
   const reader = new FileReader();
 
-  reader.onload = function (event) {
-    try {
-      const data = new Uint8Array(event.target.result);
-      const workbook = XLSX.read(data, { type: "array" });
+  reader.onload = (e) => {
+    const workbook = XLSX.read(e.target.result, { type: "binary" });
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+    parsedData = XLSX.utils.sheet_to_json(firstSheet);
 
-      const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-
-      const tableBody = document.querySelector("#previewTable tbody");
-      tableBody.innerHTML = "";
-
-      jsonData.forEach((row, index) => {
-        if (!row || typeof row !== "object") return;
-
-        const name = row["Name"] || "";
-        const number = row["Number"] || "";
-        const rawMessage = typeof row["Message"] === "string" ? row["Message"] : "";
-
-        const message = rawMessage.replace("{{name}}", name);
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${name}</td><td>${number}</td><td>${message}</td>`;
-        tableBody.appendChild(tr);
-      });
-
-      console.log("Parsed Data:", jsonData);
-    } catch (err) {
-      console.error("Error parsing file:", err);
-      alert("There was an error reading the file. Please check the format.");
-    }
+    showTable(parsedData);
   };
 
-  reader.readAsArrayBuffer(file);
+  reader.readAsBinaryString(file);
+}
+
+function showTable(data) {
+  const table = document.getElementById("preview");
+  table.innerHTML = "<tr><th>Name</th><th>Number</th><th>Message</th></tr>";
+  data.forEach(row => {
+    const name = row.name || row.Name || "";
+    const number = row.number || row.Number || "";
+    const message = row.message || row.Message || "";
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${name}</td><td>${number}</td><td>${message}</td>`;
+    table.appendChild(tr);
+  });
 }

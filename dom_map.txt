@@ -1,0 +1,5 @@
+WhatsApp Web DOM Map
+- Search input field: div[title="Search input textbox"]
+- Chat name area: div[role="listitem"] span[dir="auto"]
+- Message input box: div[title="Type a message"]
+- Send button: button[aria-label="Send"]

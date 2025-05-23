@@ -1,24 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "WhatsBlitz",
+  "name": "WhatsApp Message Sender",
   "version": "1.0",
-  "description": "WhatsApp Web automation extension",
   "permissions": ["scripting", "activeTab"],
-  "host_permissions": ["https://web.whatsapp.com/"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "WhatsBlitz"
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
       "js": ["content.js"]
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["sheet.js"],
-      "matches": ["<all_urls>"]
     }
   ]
 }
