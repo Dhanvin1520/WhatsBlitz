@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WhatsApp Sender</title>
-  <script src="libs/xlsx.full.min.js"></script>
-  <script src="popup.js" defer></script>
-  <style>
-    table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
-  </style>
+  <title>WhatsBlitz</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Upload Excel</h2>
-  <input type="file" id="fileInput" accept=".xlsx,.csv"><br><br>
-  <button id="sendFirst">Send to First Contact</button>
-  <br><br>
-  <table id="preview"></table>
+  <h2>WhatsBlitz</h2>
+  <input type="file" id="fileInput" accept=".xlsx, .csv" />
+  <button id="startBtn">Start Messaging</button>
+  <script src="xlsx.full.min.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>
