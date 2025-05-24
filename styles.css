@@ -1,17 +1,100 @@
-body {
-  font-family: Arial, sans-serif;
+#whatsblitz-sidebar {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   padding: 10px;
-  width: 200px;
+  z-index: 10000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
 }
 
-input, button {
+.whatsblitz-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.whatsblitz-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#excel-upload {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#data-preview table {
   width: 100%;
+  border-collapse: collapse;
   margin-top: 10px;
-  padding: 8px;
-  font-size: 14px;
 }
 
-h2 {
+#data-preview th, #data-preview td {
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align: left;
+}
+
+#start-btn {
+  padding: 10px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#start-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#progress-bar {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#status-log {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.popup-container {
+  width: 300px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.popup-container h2 {
   font-size: 18px;
   margin-bottom: 10px;
+}
+
+.popup-container input, .popup-container button {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.popup-container button {
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-container button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }

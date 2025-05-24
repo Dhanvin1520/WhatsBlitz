@@ -1,24 +1,28 @@
 {
   "manifest_version": 3,
   "name": "WhatsBlitz",
-  "version": "1.0",
-  "description": "Send personalized WhatsApp messages from Excel",
-  "permissions": ["scripting", "activeTab"],
-  "host_permissions": ["https://web.whatsapp.com/*"],
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "WhatsBlitz"
-  },
+  "version": "1.0.0",
+  "description": "Chrome extension for sending personalized WhatsApp messages from an Excel file",
+  "permissions": [
+    "scripting",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "css": ["styles.css"]
     }
   ],
-  "web_accessible_resources": [
-    {
-      "resources": ["libs/xlsx.full.min.js"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
 }
